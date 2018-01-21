@@ -17,12 +17,12 @@
 **/
 
 var db = require('../db');
-
+var passwordHash = require('password-hash');
 var express = require('express')
 var router = express.Router();
 
 //Get all users
-router.get('/getalluser', function(req, res) {
+router.get('/users', function(req, res) {
 
     db.query('SELECT * from users', function(error, results, feilds) {
         if (error) {
@@ -32,10 +32,13 @@ router.get('/getalluser', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "results": results
-            });
+            // res.send({
+            //     "code": 200,
+            //     "results": results
+            // });
+            console.log(results);
+            res.render('users',{valuesss: results});
+
         }
     });
 
@@ -54,10 +57,11 @@ router.get('/getuser/:userid', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "results": results
-            });
+            // res.send({
+            //     "code": 200,
+            //     "results": results
+            // });
+            res.render("edituser",{user:results});
         }
     });
 
@@ -74,8 +78,13 @@ router.put('/updateuser/:userid', function(req, res) {
         user.user_name = req.body.user_name;
     }
 
-    if (req.body.customer_id != null) {
-        user.customer_id = req.body.customer_id;
+    if (req.body.password != null) {
+        var hasPass = passwordHash.generate(req.body.password);
+        user.password = hasPass;
+    }
+
+    if (req.body.email != null) {
+        user.email = req.body.email;
     }
 
     user.updated_at = today;
@@ -102,7 +111,7 @@ router.put('/updateuser/:userid', function(req, res) {
 router.delete('/deleteuser/:userid', function(req, res) {
 
     var userid = req.params.userid;
-    db.query("DELETE users WHERE id = ?", [userid], function(error, results, feilds) {
+    db.query("DELETE from users WHERE id = ?", [userid], function(error, results, feilds) {
         if (error) {
             console.log("error ocurred while deleting user " + userid, error);
             res.send({
@@ -123,20 +132,26 @@ router.delete('/deleteuser/:userid', function(req, res) {
 //ROUTE for registering
 router.post("/registeruser", function(req,res){
     var today = new Date();
+    var hasPass = passwordHash.generate(req.body.password);
     var users = {
         "username": req.body.username,
         "email": req.body.email,
-        "password": req.body.password,
+        "password": hasPass
+        ,
         "created_at": today,
         "updated_at": today
     }
 
     db.query('INSERT INTO users SET ?', users, function(error, results, fields) {
         if (error) {
-            console.log("error ocurred", error);
+            console.log("error ocurred", error.sqlMessage);
+            console.log("error ocurred", error.code);
+
             res.send({
                 "code": 400,
-                "failed": "error ocurred"
+                "status":"failed",
+                "error":error.code,
+                "message": error.sqlMessage
             });
         } else {
             res.send({
@@ -149,23 +164,25 @@ router.post("/registeruser", function(req,res){
 
 //Route for Loging in
 router.post("/login", function(req,res){
-      var email = req.body.email;
+      var username = req.body.username;
     var password = req.body.password;
-    db.query('SELECT * FROM users WHERE email = ?', [email], function(error, results, fields) {
+    db.query('SELECT * FROM users WHERE username = ?', [username], function(error, results, fields) {
         if (error) {
+            console.log(error);
             res.send({
                 "code": 400,
                 "failed": "error ocurred"
             })
         } else {
-            console.log(results[0].password);
+            // console.log(results[0].password);
 
             if (results.length > 0) {
-                if (results[0].password == password) {
-                    res.send({
-                        "code": 200,
-                        "success": "login sucessfull"
-                    });
+                if(passwordHash.verify(password, results[0].password)){
+                    // res.send({
+                    //     "code": 200,
+                    //     "success": "login sucessfull"
+                    // });
+                     res.redirect('/users');  
                 } else {
                     res.send({
                         "code": 204,

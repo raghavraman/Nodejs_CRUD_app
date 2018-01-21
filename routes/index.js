@@ -2,10 +2,9 @@ var express = require('express')
   , router = express.Router()
 
 
-router.get('/', function(req, res) {
-    res.json({ message: 'Working perfectly' });
-});
-
+router.get('/',function(req,res) {
+    res.render('login')
+})
 // router.use(require('./loginUser'));
 router.use(require('./projects'));
 router.use(require('./users'));

@@ -24,12 +24,12 @@ CREATE TABLE IF NOT Exists `projects` (
 
 CREATE TABLE IF NOT Exists `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL UNIQUE,
   `password` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL UNIQUE,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-   CONSTRAINT customers_PK PRIMARY KEY (`id`)
+  CONSTRAINT `users_PK` PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 

@@ -1,0 +1,15 @@
+1. Bootsrap Styling
+2. Error Handling
+
+//Login
+	Success Page
+
+//Registration
+	Email id validation
+	password matching validation
+
+//Users
+	1. Edit User 
+		email validation
+	2. Delete User
+	
