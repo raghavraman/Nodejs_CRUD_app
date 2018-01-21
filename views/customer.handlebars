@@ -1,4 +1,4 @@
-<script src="/js/controllers/userController.js"></script>
+<script src="/js/controllers/customerController.js"></script>
     <!-- NAV BAR -->
 <div class="container-fluid">
      <nav class="navbar navbar-inverse">
@@ -26,7 +26,7 @@
               <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse4" aria-expanded="false" aria-controls="nav-collapse4">Profile <i class=""></i> </a>
             </li> -->
           </ul>
-          <!-- <ul class="collapse nav navbar-nav nav-collapse slide-down" role="search" id="nav-collapse4">
+         <!--  <ul class="collapse nav navbar-nav nav-collapse slide-down" role="search" id="nav-collapse4">
             <li><a href="#">Support</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle" src="https://pbs.twimg.com/profile_images/588909533428322304/Gxuyp46N.jpg" alt="maridlcrmn" width="20" /> Maridlcrmn <span class="caret"></span></a>
@@ -45,17 +45,19 @@
 </div>
     <!-- END OF NAV BAR -->
 <div class="container">
-    <!-- USER DETAILS TABLE -->
+    <!-- Customer DETAILS TABLE -->
     <div class="row">
         <div class="col-md-12">
-            <h4>User Table Details</h4>
+            <h4>Customer Table Details</h4>
             <div class="table-responsive">
                 <table id="mytable" class="table table-bordered table-striped">
                     <thead>
                         <th>Id</th>
-                        <th>Username</th>
-                        <!-- <th>Password</th> -->
-                        <th>Email</th>
+                        <th>Company</th>
+                        <th>Address</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Zip</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </thead>
@@ -63,24 +65,28 @@
                         {{#each valuesss}}
                         <tr>
                             <td>{{this.id}}</td>
-                            <td>{{this.username}}</td>
-                            <!-- <td>{{this.password}}</td> -->
-                            <td>{{this.email}}</td>
+                            <td>{{this.company}}</td>
+                            <td>{{this.address}}</td>
+                            <td>{{this.state}}</td>
+                            <td>{{this.city}}</td>
+                            <td>{{this.zip}}</td>
                             <td>
                                 <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                    <button class="open-EditUser btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#editUser"
+                                    <button class="open-EditCustomer btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#editCustomer"
                                     data-id="{{this.id}}"
-                                    data-username="{{this.username}}"
-                                    data-email="{{this.email}}"
-                                    data-password="{{this.password}}"
+                                    data-company="{{this.company}}"
+                                    data-address="{{this.address}}"
+                                    data-state="{{this.state}}"
+                                    data-city="{{this.city}}"
+                                    data-zip="{{this.zip}}"
                                     ><span class="glyphicon glyphicon-pencil"></span></button>
                                 </p>
                             </td>
                             <td>
                                 <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                    <button class="open-deleteUser btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" 
+                                    <button class="open-deleteCustomer btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" 
                                     data-id="{{this.id}}"
-                                    data-target="#deleteUser"><span class="glyphicon glyphicon-trash"></span></button>
+                                    data-target="#deleteCustomer"><span class="glyphicon glyphicon-trash"></span></button>
                                 </p>
                             </td>
                         </tr>
@@ -90,9 +96,9 @@
             </div>
         </div>
     </div>
-    <a id="add_row" class="btn btn-default pull-left ">Add User</a>
+    <a id="add_row" class="btn btn-default pull-left ">Add Customer</a>
 </div>
-<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+<div class="modal fade" id="editCustomer" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,10 +107,19 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input class="form-control" id='username' type="text" placeholder="username" value="">
+                    <input class="form-control" id='company' type="text" placeholder="Company" value="">
                 </div>
                 <div class="form-group">
-                    <input class="form-control " type="email" id="email" type="text" placeholder="email" value="">
+                    <input class="form-control" id='address' type="text" placeholder="Address" value="">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id='state' type="text" placeholder="State" value="">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id='city' type="text" placeholder="City" value="">
+                </div>
+                <div class="form-group">
+                    <input class="form-control " id="zip" type="text" placeholder="Zip" value="">
                 </div>
                   <div class="form-group" style="display:none;">
                     <input class="form-control " id="id" type="text" placeholder="id" value="">
@@ -118,7 +133,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+<div class="modal fade" id="deleteCustomer" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -126,13 +141,13 @@
                 <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
             </div>
             <div class="modal-body">
-                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this User?</div>
+                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Customer?</div>
                  <div class="form-group" style="display:none;">
                     <input class="form-control " id="id" type="text" placeholder="id" value="">
                 </div>
             </div>
             <div class="modal-footer ">
-                <button type="button" class="deleteUser btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                <button type="button" class="deleteCustomer btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
             </div>
         </div>

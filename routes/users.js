@@ -37,7 +37,10 @@ router.get('/users', function(req, res) {
             //     "results": results
             // });
             console.log(results);
-            res.render('users',{valuesss: results});
+            res.render('users',{
+                valuesss: results,
+                activeUsers: 'active'
+            });
 
         }
     });
