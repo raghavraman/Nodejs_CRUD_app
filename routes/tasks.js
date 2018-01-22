@@ -24,7 +24,7 @@ var express = require('express')
 var router = express.Router();
 
 //Get all tasks
-router.get('/getalltask', function(req, res) {
+router.get('/tasks', function(req, res) {
 
     db.query('SELECT * from tasks', function(error, results, feilds) {
         if (error) {
@@ -34,9 +34,13 @@ router.get('/getalltask', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "results": results
+            // res.send({
+            //     "code": 200,
+            //     "results": results
+            // });
+            res.render('tasks',{
+                valuesss: results,
+                activeTasks: 'active'
             });
         }
     });
@@ -71,9 +75,9 @@ router.post('/addtask', function(req, res) {
 
     var today = new Date();
     var task = {
-        "project_id":"",
+        "project_id":req.body.project_id,
         "task_name":req.body.task_name,
-        "customer_id":req.body.customer_id,
+        "user_id":req.body.user_id,
         "created_at": today,
         "updated_at": today
     }
@@ -135,7 +139,7 @@ router.put('/updatetask/:taskid', function(req, res) {
 router.delete('/deletetask/:taskid', function(req, res) {
 
     var taskid = req.params.taskid;
-    db.query("DELETE tasks WHERE id = ?", [taskid], function(error, results, feilds) {
+    db.query("DELETE from tasks WHERE id = ?", [taskid], function(error, results, feilds) {
         if (error) {
             console.log("error ocurred while deleting task " + taskid, error);
             res.send({

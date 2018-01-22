@@ -3,11 +3,17 @@ $(function() {
 	//Function to invoke edit user with data
     $(".open-EditCustomer").on("click", function() {
         console.log("sadas");
-        var username = $(this).data('username'),
-        	email = $(this).data('email'),
+        var company= $(this).data('company'),
+        	state = $(this).data('state'),
+            address = $(this).data('address'),
+            city = $(this).data('city'),
+            zip = $(this).data('zip'),
         	id = $(this).data('id');
-        $(".modal-body #username").val(username);
-        $(".modal-body #email").val(email);
+        $(".modal-body #company").val(company);
+        $(".modal-body #state").val(state);
+        $(".modal-body #address").val(address);
+        $(".modal-body #city").val(city);
+        $(".modal-body #zip").val(zip);
         $(".modal-body #id").val(id);
     });
 
@@ -22,28 +28,30 @@ $(function() {
         console.log("Updating the user details");
         var data = {},
         id= $(".modal-body #id").val();
-        data.username = $(".modal-body #username").val();
-        data.email = $(".modal-body #email").val();
-
+        data.company=$(".modal-body #company").val();
+        data.state=$(".modal-body #state").val();
+        data.address=$(".modal-body #address").val();
+        data.city=$(".modal-body #city").val();
+        data.zip=$(".modal-body #zip").val();
         $.ajax({
             url: '/updatecustomer/'+id,
             type: 'PUT',
             data: data,
             success: function(res) {
             	if(res.code==200){
-            		$('#editUser').modal('hide');
-                	alert('User details updated');
-                	window.location.href="/users";
+            		$('#editCustomer').modal('hide');
+                	alert('Customer details updated');
+                	window.location.href="/customers";
             	}else{
-            		$('#editUser').modal('hide');
-            		alert('error occured in Updating user');
-            		window.location.href="/users";	
+            		$('#editCustomer').modal('hide');
+            		alert('error occured in Updating Customer');
+            		window.location.href="/customers";	
             	}
             },
             error: function(error){
-            	$('#editUser').modal('hide');
-            	alert('error occured in Updating user');
-            	window.location.href="/users";
+            	$('#editCustomer').modal('hide');
+            	alert('error occured in customer user');
+            	window.location.href="/customers";
             }
         });
     });
@@ -60,17 +68,17 @@ $(function() {
             	if(res.code==200){
             		$('#deleteCustomer').modal('hide');
                 	alert('Customer successfully deleted');
-                	window.location.href="/users";	
+                	window.location.href="/customers";	
             	}else{
-            		$('#deleteuser').modal('hide');
-            		alert('error occured in deleting the user');
-            		window.location.href="/users";	
+            		$('#deleteCustomer').modal('hide');
+            		alert('error occured in deleting the Customer');
+            		window.location.href="/customers";	
             	}
             },
             error: function(error){
             	$('#deleteCustomer').modal('hide');
-            	alert('error occured in deleting the user');
-            	window.location.href="/users";
+            	alert('error occured in deleting the customer');
+            	window.location.href="/customers";
             }
         });
     });

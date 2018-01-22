@@ -23,7 +23,7 @@ var express = require('express')
 var router = express.Router();
 
 //Get all projects
-router.get('/getallproject', function(req, res) {
+router.get('/projects', function(req, res) {
 
     db.query('SELECT * from projects', function(error, results, feilds) {
         if (error) {
@@ -33,9 +33,13 @@ router.get('/getallproject', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "results": results
+            // res.send({
+            //     "code": 200,
+            //     "results": results
+            // });
+            res.render('projects',{
+                valuesss: results,
+                activeProjects: 'active'
             });
         }
     });
@@ -134,7 +138,7 @@ router.delete('/deleteproject/:projid', function(req, res) {
 
     var projid = req.params.projid;
 
-    db.query("DELETE projects WHERE id = ?", [projid], function(error, results, feilds) {
+    db.query("DELETE from projects WHERE id = ?", [projid], function(error, results, feilds) {
         if (error) {
 
             console.log("error ocurred while deleting project " + projid, error);

@@ -1,6 +1,8 @@
 1. Bootsrap Styling
 2. Error Handling
 
+//ERROR PAGE
+
 //Login
 	Success Page
 
@@ -11,5 +13,5 @@
 //Users
 	1. Edit User 
 		email validation
-	2. Delete User
+	2. Delete User -- Done
 	

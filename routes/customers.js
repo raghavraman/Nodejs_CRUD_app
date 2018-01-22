@@ -26,7 +26,7 @@ var express = require('express')
 var router = express.Router();
 
 //Get all customers
-router.get('/getallcustomer', function(req, res) {
+router.get('/customers', function(req, res) {
 
     db.query('SELECT * from customers', function(error, results, feilds) {
         if (error) {
@@ -36,9 +36,13 @@ router.get('/getallcustomer', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "results": results
+            // res.send({
+            //     "code": 200,
+            //     "results": results
+            // });
+            res.render('customer',{
+                valuesss: results,
+                activeCustomers: 'active'
             });
         }
     });

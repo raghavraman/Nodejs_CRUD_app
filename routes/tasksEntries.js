@@ -25,7 +25,7 @@ var express = require('express')
 var router = express.Router();
 
 //Get all taskentries
-router.get('/getalltaskentries', function(req, res) {
+router.get('/taskentries', function(req, res) {
 
     db.query('SELECT * from task_entries', function(error, results, feilds) {
         if (error) {
@@ -35,9 +35,9 @@ router.get('/getalltaskentries', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "results": results
+           res.render('taskentries',{
+                valuesss: results,
+                activeEntries: 'active'
             });
         }
     });
@@ -80,7 +80,7 @@ router.post('/addtaskentry', function(req, res) {
         "updated_at": today
     }
 
-    db.query("INSERT INTO taskentries SET ?", taskEntry, function(error, results, feilds) {
+    db.query("INSERT INTO task_entries SET ?", taskEntry, function(error, results, feilds) {
 
         if (error) {
             console.log("error ocurred while Adding new task Entry", error);
@@ -106,7 +106,7 @@ router.put('/updatetaskentry/:entryid', function(req, res) {
         taskEntry = {};
 
     if (req.body.task_id != null) {
-        taskEntry.task_name = req.body.task_id;
+        taskEntry.task_id = req.body.task_id;
     }
 
     if (req.body.duration != null) {
@@ -123,7 +123,7 @@ router.put('/updatetaskentry/:entryid', function(req, res) {
 
     taskEntry.updated_at = today;
 
-    db.query("UPDATE task_entries SET ? WHERE id = ?", [task, entryid], function(error, results, feilds) {
+    db.query("UPDATE task_entries SET ? WHERE id = ?", [taskEntry, entryid], function(error, results, feilds) {
         if (error) {
             console.log("error ocurred while Updating task Entry " + entryid, error);
             res.send({
@@ -145,7 +145,7 @@ router.put('/updatetaskentry/:entryid', function(req, res) {
 router.delete('/deletetaskentry/:entryid', function(req, res) {
 
     var entryid = req.params.entryid;
-    db.query("DELETE task_entries WHERE id = ?", [entryid], function(error, results, feilds) {
+    db.query("DELETE from task_entries WHERE id = ?", [entryid], function(error, results, feilds) {
         if (error) {
             console.log("error ocurred while deleting task Entry" + entryid, error);
             res.send({
