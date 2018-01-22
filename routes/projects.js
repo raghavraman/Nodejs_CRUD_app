@@ -1,13 +1,13 @@
 /**
-	TODO:
-	1. Get all Projects
-	2. Get Project by ID
-	3. Add project
-	4. Update project
-	5. Delete project
+    TODO:
+    1. Get all Projects
+    2. Get Project by ID
+    3. Add project
+    4. Update project
+    5. Delete project
 
-	MODEL:
-	  project = {
+    MODEL:
+      project = {
         "id",
         "project_name",
         "customer_id",
@@ -37,7 +37,7 @@ router.get('/projects', function(req, res) {
             //     "code": 200,
             //     "results": results
             // });
-            res.render('projects',{
+            res.render('projects', {
                 valuesss: results,
                 activeProjects: 'active'
             });
@@ -69,13 +69,31 @@ router.get('/getproject/:projid', function(req, res) {
 });
 
 
+router.get('/addproject', function(req, res) {
+    db.query('SELECT id from customers', function(error, results, feilds) {
+        if (error) {
+            console.log("error ocurred while getting all user", error);
+            res.send({
+                "code": 400,
+                "failed": "error ocurred"
+            });
+        } else {
+            res.render('addproject', {
+                "code": 200,
+                "customer_ids": results,
+                "activeProjects": 'active'
+            });
+        }
+    });
+});
+
 //Add project
 router.post('/addproject', function(req, res) {
 
     var today = new Date();
     var project = {
-        "project_name":req.body.project_name,
-        "customer_id":req.body.customer_id,
+        "project_name": req.body.project_name,
+        "customer_id": req.body.customer_id,
         "created_at": today,
         "updated_at": today
     }
@@ -89,11 +107,12 @@ router.post('/addproject', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "success": "projects added sucessfully",
-                "results": results
-            });
+            // res.send({
+            //     "code": 200,
+            //     "success": "projects added sucessfully",
+            //     "results": results
+            // });
+            res.redirect('/projects');
         }
     });
 });
@@ -155,5 +174,8 @@ router.delete('/deleteproject/:projid', function(req, res) {
         }
     });
 });
+
+
+
 
 module.exports = router;

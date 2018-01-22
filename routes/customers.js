@@ -1,13 +1,13 @@
 /**
-	TODO:
-	1. Get all Customers
-	2. Get Customer by ID
-	3. Add customer
-	4. Update Customer
-	5. Delete Customer
+    TODO:
+    1. Get all Customers
+    2. Get Customer by ID
+    3. Add customer
+    4. Update Customer
+    5. Delete Customer
 
-	MODEL:
-	 customer = {
+    MODEL:
+     customer = {
         "id",
         "company",
         "address",
@@ -40,7 +40,7 @@ router.get('/customers', function(req, res) {
             //     "code": 200,
             //     "results": results
             // });
-            res.render('customer',{
+            res.render('customer', {
                 valuesss: results,
                 activeCustomers: 'active'
             });
@@ -71,6 +71,12 @@ router.get('/getcustomer/:custid', function(req, res) {
 
 });
 
+router.get('/addcustomer', function(req, res) {
+
+    res.render('addcustomer', {
+        activeCustomers: 'active'
+    });
+});
 
 //Add customer
 router.post('/addcustomer', function(req, res) {
@@ -95,11 +101,12 @@ router.post('/addcustomer', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "success": "customers added sucessfully",
-                "results": results
-            });
+            // res.send({
+            //     "code": 200,
+            //     "success": "customers added sucessfully",
+            //     "results": results
+            // });
+            res.redirect('/customers');  
         }
     });
 });

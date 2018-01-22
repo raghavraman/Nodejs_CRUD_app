@@ -1,13 +1,13 @@
 /**
-	TODO:
-	1. Get all tasks
-	2. Get task by ID
-	3. Add task
-	4. Update task
-	5. Delete task
+    TODO:
+    1. Get all tasks
+    2. Get task by ID
+    3. Add task
+    4. Update task
+    5. Delete task
 
-	MODEL:
-	task = {
+    MODEL:
+    task = {
         "id",
         "project_id",
         "user_id",
@@ -38,7 +38,7 @@ router.get('/tasks', function(req, res) {
             //     "code": 200,
             //     "results": results
             // });
-            res.render('tasks',{
+            res.render('tasks', {
                 valuesss: results,
                 activeTasks: 'active'
             });
@@ -68,16 +68,50 @@ router.get('/gettask/:taskid', function(req, res) {
     });
 
 });
+router.get('/addtask', function(req, res) {
+    var user_ids = [];
+    var project_ids = [];
+    db.query('SELECT id from users', function(error, results, feilds) {
+        if (error) {
+            console.log("error ocurred while getting all user", error);
+            res.send({
+                "code": 400,
+                "failed": "error ocurred"
+            });
+        } else {
+            user_ids = results;
+            console.log(user_ids);
+            db.query('SELECT id from projects', function(error, results, feilds) {
+                if (error) {
+                    console.log("error ocurred while getting all user", error);
+                    res.send({
+                        "code": 400,
+                        "failed": "error ocurred"
+                    });
+                } else {
+                    console.log("INSIDE ", user_ids);
+                    project_ids = results;
+                    res.render('addtask',{
+                        "code": 200,
+                        "project_ids": project_ids,
+                        "user_ids": user_ids,
+                        "activeTasks": 'active'
+                    });
+                }
+            });
 
+        }
+    });
+});
 
 //Add task
 router.post('/addtask', function(req, res) {
 
     var today = new Date();
     var task = {
-        "project_id":req.body.project_id,
-        "task_name":req.body.task_name,
-        "user_id":req.body.user_id,
+        "project_id": req.body.project_id,
+        "task_name": req.body.task_name,
+        "user_id": req.body.user_id,
         "created_at": today,
         "updated_at": today
     }
@@ -91,11 +125,12 @@ router.post('/addtask', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "success": "tasks added sucessfully",
-                "results": results
-            });
+            // res.send({
+            //     "code": 200,
+            //     "success": "tasks added sucessfully",
+            //     "results": results
+            // });
+            res.redirect('/tasks');
         }
     });
 });

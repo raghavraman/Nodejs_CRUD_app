@@ -1,0 +1,73 @@
+    <!-- NAV BAR -->
+<div class="container-fluid">
+     <nav class="navbar navbar-inverse">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-4">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Code Day</a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-4">
+          <ul class="nav navbar-nav navbar-right">
+             <li class="{{activeUsers}}"><a href="/users">Users</a></li>
+            <li class="{{activeCustomers}}"><a href="/customers">Customers</a></li>
+            <li class="{{activeProjects}}"><a href="/projects">Projects</a></li>
+             <li class="{{activeTasks}}"><a href="/tasks">Tasks</a></li>
+            <li class="{{activeEntries}}"><a href="/taskentries">TaskEntries</a></li>
+           <!--  <li>
+              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse4" aria-expanded="false" aria-controls="nav-collapse4">Profile <i class=""></i> </a>
+            </li> -->
+          </ul>
+         <!--  <ul class="collapse nav navbar-nav nav-collapse slide-down" role="search" id="nav-collapse4">
+            <li><a href="#">Support</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle" src="https://pbs.twimg.com/profile_images/588909533428322304/Gxuyp46N.jpg" alt="maridlcrmn" width="20" /> Maridlcrmn <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">My profile</a></li>
+                <li><a href="#">Favorited</a></li>
+                <li><a href="#">Settings</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul> -->
+        </div>
+      </div>
+    </nav>
+</div>
+    <!-- END OF NAV BAR -->
+<div class="container">
+    <div class="col-md-5">
+        <div class="form-area">
+            <h2>Add Customer</h2>
+            <form action="/addcustomer" method="post" role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="company" name="company" placeholder="Company" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="address" name="address" placeholder="address" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="state" name="state" placeholder="State" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Add Customer" class="btn btn-primary pull-right">
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    </div>
+</div>
