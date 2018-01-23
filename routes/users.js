@@ -20,6 +20,7 @@ var db = require('../db');
 var passwordHash = require('password-hash');
 var express = require('express')
 var router = express.Router();
+var cookies = require( "cookies" );
 
 //Get all users
 router.get('/users', function(req, res) {
@@ -36,7 +37,6 @@ router.get('/users', function(req, res) {
             //     "code": 200,
             //     "results": results
             // });
-            console.log(results);
             res.render('users',{
                 valuesss: results,
                 activeUsers: 'active'
@@ -157,10 +157,11 @@ router.post("/registeruser", function(req,res){
                 "message": error.sqlMessage
             });
         } else {
-            res.send({
-                "code": 200,
-                "success": "user registered sucessfully"
-            });
+            // res.send({
+            //     "code": 200,
+            //     "success": "user registered sucessfully"
+            // });
+            res.redirect('/login');
         }
     });
 });
@@ -185,7 +186,10 @@ router.post("/login", function(req,res){
                     //     "code": 200,
                     //     "success": "login sucessfull"
                     // });
-                     res.redirect('/users');  
+                    userHash = passwordHash.generate(results[0].username);
+                    res.cookie('_ot',userHash);
+                    res.cookie('_at',results[0].username);
+                    res.redirect('/dashboard');  
                 } else {
                     res.send({
                         "code": 204,
@@ -195,7 +199,7 @@ router.post("/login", function(req,res){
             } else {
                 res.send({
                     "code": 204,
-                    "success": "Email does not exits"
+                    "success": "username does not exits"
                 });
             }
         }
@@ -203,5 +207,3 @@ router.post("/login", function(req,res){
 });
 
 module.exports =router;
-
-module.exports = router;

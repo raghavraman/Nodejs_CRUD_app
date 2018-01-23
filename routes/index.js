@@ -3,8 +3,27 @@ var express = require('express')
 
 
 router.get('/',function(req,res) {
-    res.render('login')
-})
+
+    res.redirect('login')
+
+});
+
+router.get('/login',function(req,res){
+	res.render('login');
+});
+
+router.get('/dashboard',function(req,res){
+	var userName = req.cookies['_at'];
+	res.render('profile',{user:userName});
+});
+
+
+router.get('/logout',function(req,res){
+	res.clearCookie("_ot");
+	res.clearCookie("_at");
+	res.redirect('login');
+});
+
 // router.use(require('./loginUser'));
 router.use(require('./projects'));
 router.use(require('./users'));

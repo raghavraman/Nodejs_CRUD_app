@@ -1,8 +1,10 @@
 {
-
-    "host": "localhost",
-    "user": "root",
-    "password": "",
-    "database": "cmmtest"
-
+    "db":
+    {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "cmmtest"
+    },
+    "admin":["RaghavRaman"]
 }
