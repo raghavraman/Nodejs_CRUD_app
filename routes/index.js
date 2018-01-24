@@ -14,7 +14,7 @@ router.get('/login',function(req,res){
 
 router.get('/dashboard',function(req,res){
 	var userName = req.cookies['_at'];
-	res.render('profile',{user:userName});
+	res.render('profile',{user:userName,activeDash:"active"});
 });
 
 

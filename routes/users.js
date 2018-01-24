@@ -161,7 +161,7 @@ router.post("/registeruser", function(req,res){
             //     "code": 200,
             //     "success": "user registered sucessfully"
             // });
-            res.redirect('/login');
+            res.render('login',{message:"Please Login to continue"});
         }
     });
 });
@@ -191,16 +191,18 @@ router.post("/login", function(req,res){
                     res.cookie('_at',results[0].username);
                     res.redirect('/dashboard');  
                 } else {
-                    res.send({
-                        "code": 204,
-                        "success": "Email and password does not match"
-                    });
+                    // res.send({
+                    //     "code": 204,
+                    //     "success": "Email and password does not match"
+                    // });
+                    res.render('login',{message:"UserName and Password does not match"});
                 }
             } else {
-                res.send({
-                    "code": 204,
-                    "success": "username does not exits"
-                });
+                // res.send({
+                //     "code": 204,
+                //     "success": "username does not exits"
+                // });
+                res.render('login',{message:"UserName name doesnt not exists"});
             }
         }
     });

@@ -49,6 +49,7 @@
             <h2>Add Project</h2>
             <form action="/addproject" method="post" role="form">
                 <div class="form-group">
+                <label >Customer Id</label>
                    <select class="form-control" id="customer_id" name="customer_id">
                       {{#each customer_ids}}
                          <option>{{this.id}}</option>
@@ -56,7 +57,8 @@
                   </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Project Name" required>
+                <label >Project Name</label>
+                    <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Project X" required>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Add Project" class="btn btn-primary pull-right">
