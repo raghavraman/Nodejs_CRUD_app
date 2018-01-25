@@ -7,6 +7,11 @@ router.get('/',function(req,res) {
     res.redirect('login')
 
 });
+router.get('/other',function(req,res) {
+
+    res.render('other')
+
+});
 
 router.get('/login',function(req,res){
 	res.render('login');

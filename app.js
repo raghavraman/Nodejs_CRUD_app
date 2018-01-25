@@ -36,7 +36,7 @@ app.use(session({
 }))
 
 function isAuthenticated(req, res, next) {
-    if (req.path == "/login" || req.path == "/logout" || req.path == '/registeruser') {
+    if (req.path == "/login" || req.path == "/logout" || req.path == '/registeruser' || req.path=="/other") {
         next();
     } else {
         if (req.cookies['_ot'] && req.cookies['_at']) {
