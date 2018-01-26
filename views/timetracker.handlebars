@@ -29,7 +29,7 @@
             <li class="{{activeProjects}}"><a href="/projects">Projects</a></li>
              <li class="{{activeTasks}}"><a href="/tasks">Tasks</a></li>
             <li class="{{activeEntries}}"><a href="/taskentries">TaskEntries</a></li>
-            <li class="{{activeEntries}}"><a href="/taskentries">Time Tracker</a></li>
+            <li class="{{activeTime}}"><a href="/timetracker">Time Tracker</a></li>
             <li><a href="/logout">Logout</a></li>
           </ul>
         </div>
@@ -50,14 +50,23 @@
       <p>Note<span>{{this.note}}</span></p>
       <p>Start Time<span>{{this.start_time}}</span></p>
   {{/each}} -->
-
+ <div class="form-group">
+  <label >Project Id</label>
+     <select class="" id="project_id" name="project_id" onchange="report(this.value)">
+       <option disabled selected value> -- select an option -- </option>
+        {{#each project_ids}}
+           <option>{{this.id}}</option>
+        {{/each}}
+    </select>
+  </div>
 
    <div class="row">
         <div class="col-md-12">
-            <h4>User Table Details</h4>
+            <h4>Time tracking Details</h4>
             <div class="table-responsive">
                 <table id="mytable" class="table table-bordered table-striped">
                     <thead>
+                        <th>Project id</th>
                         <th>Task Name</th>
                         <th>Time Entry Description</th>
                         <th>Duration</th>
@@ -67,6 +76,7 @@
                     <tbody>
                         {{#each valuesss}}
                         <tr>
+                            <td>{{this.project_id}}</td>
                             <td>{{this.task_name}}</td>
                             <td>{{this.note}}</td>
                             <td>{{this.duration}}</td>
@@ -91,8 +101,10 @@
                     </tbody>
                 </table>
             </div>
+            <span>The total Duration in seconds is </span> <STRONG> {{totalDuration}}</STRONG> 
         </div>
     </div>
+    <a id="add_row" class="btn btn-default pull-left" href="/addtaskentry">Add Task Entry</a>
 </div>
 <div class="modal fade" id="editTaskEntry" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -103,12 +115,15 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                  <label>Duration</label>
                     <input class="form-control" id='duration' type="text" placeholder="Duration" value="">
                 </div>
                 <div class="form-group">
+                  <label> Description of entry</label>
                     <input class="form-control" id='note' type="text" placeholder="note" value="">
                 </div>
                 <div class="form-group">
+                  <label> start Time</label>
                     <input class="form-control" id='start_time' type="time" placeholder="start_time" value="">
                 </div>
                 <div class="form-group" style="display:none;">

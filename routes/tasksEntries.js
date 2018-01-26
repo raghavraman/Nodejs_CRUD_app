@@ -26,7 +26,6 @@ var router = express.Router();
 
 //Get all taskentries
 router.get('/taskentries', function(req, res) {
-
     db.query('SELECT * from task_entries', function(error, results, feilds) {
         if (error) {
             console.log("error ocurred while getting all task entries", error);
@@ -67,7 +66,8 @@ router.get('/gettaskentry/:entryid', function(req, res) {
 });
 
 router.get('/addtaskentry', function(req, res) {
-db.query('SELECT id from tasks', function(error, results, feilds) {
+    user_id = req.cookies['_atid'];
+db.query('SELECT id from tasks where user_id = ?',[user_id],function(error, results, feilds) {
         if (error) {
             console.log("error ocurred while getting all user", error);
             res.send({
@@ -111,7 +111,7 @@ router.post('/addtaskentry', function(req, res) {
             //     "success": "taskentries added sucessfully",
             //     "results": results
             // });
-            res.redirect('/taskentries');
+            res.redirect('/timetracker');
         }
     });
 });

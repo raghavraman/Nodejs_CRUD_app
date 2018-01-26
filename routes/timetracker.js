@@ -5,9 +5,47 @@ var router = express.Router();
 var cookies = require("cookies");
 
 
+// router.get('/timetracker', function(req, res) {
+// 	user_id = req.cookies['_atid'];
+//     db.query('SELECT task_entries.id as entry_id,task_entries.task_id as task_id,task_entries.duration as duration,task_entries.note,task_entries.start_time,tasks.project_id,tasks.user_id,tasks.task_name,tasks.id as task_id from task_entries join tasks on tasks.id = task_entries.task_id where tasks.user_id=?',[user_id], function(error, results, feilds) {
+//         if (error) {
+//             console.log("error ocurred while getting all task_entries", error);
+//             res.send({
+//                 "code": 400,
+//                 "failed": "error ocurred"
+//             });
+//         } else {
+//             // res.send({
+//             //     "code": 200,
+//             //     "results": results
+//             // });
+//             console.log(results);
+//             var totalDuration=0;
+//             for(i =0;i<results.length;i++){
+//              totalDuration+=parseInt(results[i].duration);}
+//             res.render('timetracker', {
+//                 valuesss: results,
+//                 totalDuration:totalDuration,
+//                 activeUsers: 'active'
+
+//             });
+
+//         }
+//     });
+// });
+
+
 router.get('/timetracker', function(req, res) {
+	project_id=req.query.project_id;
 	user_id = req.cookies['_atid'];
-    db.query('SELECT task_entries.id as entry_id,task_entries.task_id as task_id,task_entries.duration as duration,task_entries.note,task_entries.start_time,tasks.project_id,tasks.user_id,tasks.task_name,tasks.id as task_id from task_entries join tasks on tasks.id = task_entries.task_id where tasks.user_id=?',[user_id], function(error, results, feilds) {
+
+	var queryString= "SELECT task_entries.id as entry_id,task_entries.task_id as task_id,task_entries.duration as duration,task_entries.note,task_entries.start_time,tasks.project_id,tasks.user_id,tasks.task_name,tasks.id as task_id from task_entries join tasks on tasks.id = task_entries.task_id where tasks.user_id=?"
+
+	if(project_id!=null){
+		queryString+= "and project_id = ?"
+	}
+
+    db.query(queryString,[user_id,project_id], function(error, results, feilds) {
         if (error) {
             console.log("error ocurred while getting all task_entries", error);
             res.send({
@@ -19,10 +57,33 @@ router.get('/timetracker', function(req, res) {
             //     "code": 200,
             //     "results": results
             // });
-            // console.log(results);
-            res.render('timetracker', {
-                valuesss: results,
-                activeUsers: 'active'
+            console.log(results);
+            var totalDuration=0;
+            for(i =0;i<results.length;i++){
+            totalDuration+=parseInt(results[i].duration);}
+            valuesss=results;
+            // res.render('timetracker', {
+            //     valuesss: results,
+            //     totalDuration:totalDuration,
+            //     activeUsers: 'active'
+
+            // });
+             db.query('SELECT id from projects', function(error, results, feilds) {
+                if (error) {
+                    console.log("error ocurred while getting all project_id", error);
+                    res.send({
+                        "code": 400,
+                        "failed": "error ocurred"
+                    });
+                } else {
+                    project_ids = results;
+                    res.render('timetracker',{
+                        "project_ids": project_ids,
+                        valuesss: valuesss,
+                        totalDuration:totalDuration,
+                        activeTime: 'active'
+                    });
+                }
             });
 
         }

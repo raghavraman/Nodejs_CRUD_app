@@ -51,7 +51,7 @@ CREATE TABLE IF NOT Exists `task_entries` (
   `task_id` int(11) NOT NULL,
   `duration` int(10) DEFAULT 0,
   `note` varchar(100) DEFAULT NULL,
-  `start_time` datetime DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   CONSTRAINT `task_entries_PK` PRIMARY KEY (`id`),

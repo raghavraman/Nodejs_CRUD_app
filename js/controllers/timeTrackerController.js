@@ -26,7 +26,6 @@ $(function() {
         console.log("Updating the Task Entry details");
         var data = {},
         id= $(".modal-body #id").val();
-        debugger;
         data.duration=$(".modal-body #duration").val();
         data.note=$(".modal-body #note").val();
         data.start_time=$(".modal-body #start_time").val();
@@ -63,7 +62,6 @@ function startTimer(input){
             type: 'PUT',
             success: function(res) {
                 if(res.code==200){
-                    debugger;
                     alert('Timer Started');
                     window.location.href="/timetracker";
                 }else{
@@ -84,20 +82,17 @@ function stopTimer(input){
     var startTimeStr = $(input).attr('data-time');
     var oldDur = $(input).attr('data-duration');
     var id = $(input).attr('data-id');
-    debugger;
     console.log(startTimeStr);
     var old_time = moment(startTimeStr, 'HH:mm:ss');
     var duration = moment().diff(old_time,'seconds');
-    data.duration =parseInt(duration)+parseInt(oldDur)
-    console.log(data.duration);
-    debugger;
+    data.duration =parseInt(duration)+parseInt(oldDur);
+    
      $.ajax({
             url: '/stopTimer/'+id,
             type: 'PUT',
             data:data,
             success: function(res) {
                 if(res.code==200){
-                    // debugger;
                     alert('Timer Stopped');
                     window.location.href="/timetracker";
                 }else{
@@ -110,4 +105,11 @@ function stopTimer(input){
                     window.location.href="/timetracker";  
             }
         });
+}
+function report(id) {
+  // if (period=="") return; // please select - possibly you want something else here
+  console.log(id);
+window.location.href="/timetracker?project_id="+id;
+            
+
 }
