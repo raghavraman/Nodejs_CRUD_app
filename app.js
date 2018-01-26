@@ -20,10 +20,11 @@ app.use(function(req, res, next) {  
     next();
 });
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine('handlebars', exphbs({ defaultLayout: 'main',helpers: require(__dirname+"/js/helper.js").helpers }));
 app.set('view engine', 'handlebars');
 app.use("/css", express.static(__dirname + "/css"));
 app.use("/js", express.static(__dirname + "/js"));
+
 
 console.log("sdsadsd      ", __dirname);
 app.set('views', __dirname + '/views');

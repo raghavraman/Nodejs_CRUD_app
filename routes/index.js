@@ -35,5 +35,6 @@ router.use(require('./users'));
 router.use(require('./tasksEntries'));
 router.use(require('./tasks'));
 router.use(require('./customers'));
+router.use(require('./timetracker'));
 
 module.exports = router;

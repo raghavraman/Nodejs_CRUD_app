@@ -1,0 +1,98 @@
+<script src="/js/controllers/timeTrackerController.js"></script>
+{{#if successMessage}}
+    <div class="alert alert-success"><strong>Success!</strong> {{successMessage}}</div>
+{{/if}}
+
+{{#if errorMessage}}
+   <div class="alert alert-danger"><strong>Oops!</strong> {{errorMessage}}</div>
+{{/if}}
+    <!-- NAV BAR -->
+<div class="container-fluid">
+     <nav class="navbar navbar-inverse">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-4">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand {{activedash}}" href="/dashboard">Code Day</a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-4">
+          <ul class="nav navbar-nav navbar-right">
+             <li class="{{activeUsers}}"><a href="/users">Users</a></li>
+            <li class="{{activeCustomers}}"><a href="/customers">Customers</a></li>
+            <li class="{{activeProjects}}"><a href="/projects">Projects</a></li>
+             <li class="{{activeTasks}}"><a href="/tasks">Tasks</a></li>
+            <li class="{{activeEntries}}"><a href="/taskentries">TaskEntries</a></li>
+            <li class="{{activeEntries}}"><a href="/taskentries">Time Tracker</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</div>
+<!-- END OF NAV BAR -->
+<div class="container">
+  <p> Time tracker </p>
+<!-- 
+  {{#each valuesss}}
+      <p>TASK ENTRY ID<span>{{this.id}}</span></p>
+      <p>TASK ID<span>{{this.task_id}}</span></p>
+      <p>Project ID<span>{{this.project_id}}</span></p>
+      <p>User ID<span>{{this.user_id}}</span></p>
+      <p>Task Name <span>{{this.task_name}}</span></p>
+      <p>Duration<span>{{this.duration}}</span></p>
+      <p>Note<span>{{this.note}}</span></p>
+      <p>Start Time<span>{{this.start_time}}</span></p>
+  {{/each}} -->
+
+
+   <div class="row">
+        <div class="col-md-12">
+            <h4>User Table Details</h4>
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordered table-striped">
+                    <thead>
+                        <th>Task Name</th>
+                        <th>Time Entry Description</th>
+                        <th>Duration</th>
+                        <th>Start Timer</th>
+                        <th>Edit Entry</th>
+                    </thead>
+                    <tbody>
+                        {{#each valuesss}}
+                        <tr>
+                            <td>{{this.task_name}}</td>
+                            <td>{{this.note}}</td>
+                            <td>{{this.duration}}</td>
+                            <td>{{#ifEquals start_time "00:00:00"}}
+                                <button type="button" class="btn btn-success" onclick="startTimer({{this.entry_id}})">Start</button>
+                                {{else}}
+                                <button type="button" class="btn btn-danger" onclick="stopTimer({{this.entry_id}})"">Stop</button>
+                                {{/ifEquals}}
+                            </td>
+                            <td>
+                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                    <button class="open-EditUser btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#editUser"
+                                    data-id="{{this.id}}"
+                                    data-username="{{this.username}}"
+                                    data-email="{{this.email}}"
+                                    data-password="{{this.password}}"
+                                    ><span class="glyphicon glyphicon-pencil"></span></button>
+                                </p>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -90,7 +90,7 @@ router.post('/addtaskentry', function(req, res) {
     var today = new Date();
     var taskEntry = {
         "task_id": req.body.task_id,
-        "duration": req.body.duration,
+        "duration": req.body.duration?req.body.duration:0,
         "note": req.body.note,
         "start_time": req.body.start_time,
         "created_at": today,
