@@ -1,10 +1,14 @@
 <script src="/js/controllers/userController.js"></script>
-    <!-- NAV BAR -->
+{{#if successMessage}}
+    <div class="alert alert-success"><strong>Success!</strong> {{successMessage}}</div>
+{{/if}}
 
-<!-- 
-{{#if message}}
-    <div class="alert alert-danger col-sm-12">{{message}}</div>
-{{/if}} -->
+{{#if errorMessage}}
+   <div class="alert alert-danger">
+  <strong>Oops!</strong> {{errorMessage}}
+</div>
+{{/if}}
+<!-- NAV BAR -->
 <div class="container-fluid">
      <nav class="navbar navbar-inverse">
       <div class="container">

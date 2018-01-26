@@ -1,6 +1,10 @@
 <script src="/js/controllers/loginController.js"></script>
-{{#if message}}
-    <div class="alert alert-danger col-sm-12">{{message}}</div>
+{{#if successMessage}}
+    <div class="alert alert-success"><strong>Success!</strong> {{successMessage}}</div>
+{{/if}}
+
+{{#if errorMessage}}
+   <div class="alert alert-danger"><strong>Oops!</strong> {{errorMessage}}</div>
 {{/if}}
 <div class="container">
       <div class="row">

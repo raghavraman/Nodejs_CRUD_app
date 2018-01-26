@@ -49,8 +49,8 @@
             <h2>Add Task</h2>
             <form action="/addtask" method="post" role="form">
                 <div class="form-group">
-                   <select class="form-control" id="project_id" name="project_id">
-                      {{#each project_ids}}
+                  <select class="js-example-basic-single" name="project_id">
+                    {{#each project_ids}}
                          <option>{{this.id}}</option>
                       {{/each}}
                   </select>

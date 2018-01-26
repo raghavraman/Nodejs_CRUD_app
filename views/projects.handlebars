@@ -1,4 +1,11 @@
 <script src="/js/controllers/projectController.js"></script>
+{{#if successMessage}}
+    <div class="alert alert-success"><strong>Success!</strong> {{successMessage}}</div>
+{{/if}}
+
+{{#if errorMessage}}
+   <div class="alert alert-danger"><strong>Oops!</strong> {{errorMessage}}</div>
+{{/if}}
     <!-- NAV BAR -->
 <div class="container-fluid">
     <nav class="navbar navbar-inverse">
