@@ -186,9 +186,11 @@ router.post("/login", function(req,res){
                     //     "code": 200,
                     //     "success": "login sucessfull"
                     // });
-                    userHash = passwordHash.generate(results[0].username);
+                    var key=results[0].username+results[0].id;
+                    userHash = passwordHash.generate(key);
                     res.cookie('_ot',userHash);
                     res.cookie('_at',results[0].username);
+                    res.cookie('_atid',results[0].id);
                     res.redirect('/dashboard');  
                 } else {
                     // res.send({

@@ -40,8 +40,9 @@ function isAuthenticated(req, res, next) {
     if (req.path == "/login" || req.path == "/logout" || req.path == '/registeruser' || req.path=="/other") {
         next();
     } else {
-        if (req.cookies['_ot'] && req.cookies['_at']) {
-            if (passwordHash.verify(req.cookies['_at'], req.cookies['_ot'])) {
+        if (req.cookies['_ot'] && req.cookies['_at'] && req.cookies['_atid']) {
+            var key = req.cookies['_at']+req.cookies['_atid'];
+            if (passwordHash.verify(key, req.cookies['_ot'])) {
                 next();
             } else {
 				res.redirect('/login');

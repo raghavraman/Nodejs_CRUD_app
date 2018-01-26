@@ -1,13 +1,17 @@
 $(function() {
 
 	//Function to invoke edit user with data
-    $(".open-EditUser").on("click", function() {
+     $(".open-EditTaskEntry").on("click", function() {
         console.log("sadas");
-        var username = $(this).data('username'),
-        	email = $(this).data('email'),
-        	id = $(this).data('id');
-        $(".modal-body #username").val(username);
-        $(".modal-body #email").val(email);
+        var task_id= $(this).data('task_id'),
+            duration = $(this).data('duration'),
+            note = $(this).data('note'),
+            start_time = $(this).data('start_time'),
+            id = $(this).data('id');
+        $(".modal-body #task_id").val(task_id);
+        $(".modal-body #duration").val(duration);
+        $(".modal-body #note").val(note);
+        $(".modal-body #start_time").val(start_time);
         $(".modal-body #id").val(id);
     });
 
@@ -18,35 +22,37 @@ $(function() {
         $(".modal-body #id").val(id);
     });
 
-    $(".submitUpdate").on("click", function() {
-        console.log("Updating the user details");
+     $(".submitUpdate").on("click", function() {
+        console.log("Updating the Task Entry details");
         var data = {},
         id= $(".modal-body #id").val();
-        data.username = $(".modal-body #username").val();
-        data.email = $(".modal-body #email").val();
-
+        debugger;
+        data.duration=$(".modal-body #duration").val();
+        data.note=$(".modal-body #note").val();
+        data.start_time=$(".modal-body #start_time").val();
         $.ajax({
-            url: '/updateuser/'+id,
+            url: '/updatetaskentry/'+id,
             type: 'PUT',
             data: data,
             success: function(res) {
-            	if(res.code==200){
-            		$('#editUser').modal('hide');
-                	alert('User details updated');
-                	window.location.href="/users";
-            	}else{
-            		$('#editUser').modal('hide');
-            		alert('error occured in Updating user');
-            		window.location.href="/users";	
-            	}
+                if(res.code==200){
+                    $('#editTaskEntry').modal('hide');
+                    alert('Task Entry details updated');
+                    window.location.href="/timetracker"; 
+                }else{
+                    $('#editTaskEntry').modal('hide');
+                    alert('error occured in Updating Task Entry');
+                    window.location.href="/timetracker";     
+                }
             },
             error: function(error){
-            	$('#editUser').modal('hide');
-            	alert('error occured in Updating user');
-            	window.location.href="/users";
+                $('#editTaskEntry').modal('hide');
+                    alert('error occured in Updating Task Entry');
+                    window.location.href="/timetracker"; 
             }
         });
     });
+
 
 });
 
@@ -61,37 +67,46 @@ function startTimer(input){
                     alert('Timer Started');
                     window.location.href="/timetracker";
                 }else{
-                    alert('error occured in Starting timer user');
+                    alert('error occured in Starting timer ');
                     window.location.href="/timetracker";  
                 }
             },
             error: function(error){
-                     alert('error occured in Starting timer user');
+                     alert('error occured in Starting timer ');
                     window.location.href="/timetracker";  
             }
         });
 }
 
-function stopTimer(id, startTime, duration){
+function stopTimer(input){
     console.log(input);
-    data.startTime = startTime;
-    data.duration = duration;
+    var data={}
+    var startTimeStr = $(input).attr('data-time');
+    var oldDur = $(input).attr('data-duration');
+    var id = $(input).attr('data-id');
+    debugger;
+    console.log(startTimeStr);
+    var old_time = moment(startTimeStr, 'HH:mm:ss');
+    var duration = moment().diff(old_time,'seconds');
+    data.duration =parseInt(duration)+parseInt(oldDur)
+    console.log(data.duration);
+    debugger;
      $.ajax({
-            url: '/stopTimer/'+input,
+            url: '/stopTimer/'+id,
             type: 'PUT',
             data:data,
             success: function(res) {
                 if(res.code==200){
-                    debugger;
-                    alert('Timer Started');
+                    // debugger;
+                    alert('Timer Stopped');
                     window.location.href="/timetracker";
                 }else{
-                    alert('error occured in Starting timer user');
+                    alert('error occured in STOPPING timer ');
                     window.location.href="/timetracker";  
                 }
             },
             error: function(error){
-                     alert('error occured in Starting timer user');
+                     alert('error occured in STOPPING timer ');
                     window.location.href="/timetracker";  
             }
         });

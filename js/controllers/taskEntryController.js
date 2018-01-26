@@ -8,6 +8,7 @@ $(function() {
             note = $(this).data('note'),
             start_time = $(this).data('start_time'),
         	id = $(this).data('id');
+            console.log(id);
         $(".modal-body #task_id").val(task_id);
         $(".modal-body #duration").val(duration);
         $(".modal-body #note").val(note);

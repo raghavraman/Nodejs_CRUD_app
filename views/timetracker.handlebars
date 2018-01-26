@@ -73,17 +73,17 @@
                             <td>{{#ifEquals start_time "00:00:00"}}
                                 <button type="button" class="btn btn-success" onclick="startTimer({{this.entry_id}})">Start</button>
                                 {{else}}
-                                <button type="button" class="btn btn-danger" onclick="stopTimer({{this.entry_id}})"">Stop</button>
+                                <button type="button" class="btn btn-danger" data-id = "{{this.entry_id}}" data-duration="{{this.duration}}" data-time="{{this.start_time}}" onclick="stopTimer(this)">Stop</button>
                                 {{/ifEquals}}
                             </td>
                             <td>
-                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                    <button class="open-EditUser btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#editUser"
-                                    data-id="{{this.id}}"
-                                    data-username="{{this.username}}"
-                                    data-email="{{this.email}}"
-                                    data-password="{{this.password}}"
-                                    ><span class="glyphicon glyphicon-pencil"></span></button>
+                               <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                    <button class="open-EditTaskEntry btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#editTaskEntry" 
+                                    data-id="{{this.entry_id}}" 
+                                    data-task_id="{{this.task_id}}" 
+                                    data-duration="{{this.duration}}" 
+                                    data-note="{{this.note}}" 
+                                    data-start_time="{{this.start_time}}"><span class="glyphicon glyphicon-pencil"></span></button>
                                 </p>
                             </td>
                         </tr>
@@ -93,6 +93,33 @@
             </div>
         </div>
     </div>
-
-
+</div>
+<div class="modal fade" id="editTaskEntry" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input class="form-control" id='duration' type="text" placeholder="Duration" value="">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id='note' type="text" placeholder="note" value="">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id='start_time' type="time" placeholder="start_time" value="">
+                </div>
+                <div class="form-group" style="display:none;">
+                    <input class="form-control " id="id" type="text" placeholder="id" value="">
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="submitUpdate btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
