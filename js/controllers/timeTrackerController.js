@@ -108,8 +108,13 @@ function stopTimer(input){
 }
 function report(id) {
   // if (period=="") return; // please select - possibly you want something else here
+    console.log(id);
+    window.location.href="/timetracker?project_id="+id;
+}
+function reportCustomer(id) {
+  // if (period=="") return; // please select - possibly you want something else here
   console.log(id);
-window.location.href="/timetracker?project_id="+id;
+window.location.href="/timetracker?customer="+id;
             
 
 }

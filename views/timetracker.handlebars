@@ -38,7 +38,6 @@
 </div>
 <!-- END OF NAV BAR -->
 <div class="container">
-  <p> Time tracker </p>
 <!-- 
   {{#each valuesss}}
       <p>TASK ENTRY ID<span>{{this.id}}</span></p>
@@ -50,6 +49,17 @@
       <p>Note<span>{{this.note}}</span></p>
       <p>Start Time<span>{{this.start_time}}</span></p>
   {{/each}} -->
+
+   <div class="form-group">
+  <label >Customer Id</label>
+     <select class="" id="project_id" name="project_id" onchange="reportCustomer(this.value)">
+       <option disabled selected value> -- select an option -- </option>
+        {{#each project_ids}}
+           <option>{{this.id}}</option>
+        {{/each}}
+    </select>
+  </div>
+
  <div class="form-group">
   <label >Project Id</label>
      <select class="" id="project_id" name="project_id" onchange="report(this.value)">
@@ -60,6 +70,8 @@
     </select>
   </div>
 
+ 
+
    <div class="row">
         <div class="col-md-12">
             <h4>Time tracking Details</h4>
@@ -67,6 +79,7 @@
                 <table id="mytable" class="table table-bordered table-striped">
                     <thead>
                         <th>Project id</th>
+                        <th>Task id</th>
                         <th>Task Name</th>
                         <th>Time Entry Description</th>
                         <th>Duration</th>
@@ -76,6 +89,7 @@
                     <tbody>
                         {{#each valuesss}}
                         <tr>
+                            <td>{{this.project_id}}</td>
                             <td>{{this.project_id}}</td>
                             <td>{{this.task_name}}</td>
                             <td>{{this.note}}</td>
