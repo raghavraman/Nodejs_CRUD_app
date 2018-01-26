@@ -66,6 +66,23 @@ router.get('/gettaskentry/:entryid', function(req, res) {
 
 });
 
+router.get('/addtaskentry', function(req, res) {
+db.query('SELECT id from tasks', function(error, results, feilds) {
+        if (error) {
+            console.log("error ocurred while getting all user", error);
+            res.send({
+                "code": 400,
+                "failed": "error ocurred"
+            });
+        } else {
+            res.render('addtaskentry', {
+                "code": 200,
+                "task_ids": results,
+                "activeEntries": 'active'
+            });
+        }
+    });
+});
 
 //Add task
 router.post('/addtaskentry', function(req, res) {
@@ -89,11 +106,12 @@ router.post('/addtaskentry', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.send({
-                "code": 200,
-                "success": "taskentries added sucessfully",
-                "results": results
-            });
+            // res.send({
+            //     "code": 200,
+            //     "success": "taskentries added sucessfully",
+            //     "results": results
+            // });
+            res.redirect('/taskentries');
         }
     });
 });

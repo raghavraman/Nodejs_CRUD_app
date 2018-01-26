@@ -33,6 +33,7 @@
             <h2>Add Task Entry</h2>
             <form action="/addtaskentry" method="post" role="form">
                 <div class="form-group">
+                    <label >Task Id</label>
                      <select class="form-control" id="task_id" name="task_id">
                       {{#each task_ids}}
                          <option>{{this.id}}</option>
@@ -40,12 +41,15 @@
                   </select>
                 </div>
                 <div class="form-group">
+                  <label >Duration</label>
                     <input type="text" class="form-control" id="duration" name="duration" placeholder="Duration" required>
                 </div>
                 <div class="form-group">
+                  <label >Note</label>
                     <input type="text" class="form-control" id="note" name="note" placeholder="Note" required>
                 </div>
                 <div class="form-group">
+                  <label >Start Time</label>
                     <input type="datetime-local" class="form-control" id="start_time" name="start_time" placeholder="start_time" required>
                 </div>
                 <div class="form-group">
