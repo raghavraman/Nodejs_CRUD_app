@@ -73,7 +73,7 @@ router.get('/getcustomer/:custid', function(req, res) {
 
 router.get('/addcustomer', function(req, res) {
 
-    res.render('addcustomer', {
+    res.render('addCustomer', {
         activeCustomers: 'active'
     });
 });

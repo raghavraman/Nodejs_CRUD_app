@@ -75,7 +75,7 @@ db.query('SELECT id from tasks where user_id = ?',[user_id],function(error, resu
                 "failed": "error ocurred"
             });
         } else {
-            res.render('addtaskentry', {
+            res.render('addTaskEntry', {
                 "code": 200,
                 "task_ids": results,
                 "activeEntries": 'active'

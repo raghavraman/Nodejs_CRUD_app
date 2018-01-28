@@ -78,7 +78,7 @@ router.get('/addproject', function(req, res) {
                 "failed": "error ocurred"
             });
         } else {
-            res.render('addproject', {
+            res.render('addProject', {
                 "code": 200,
                 "customer_ids": results,
                 "activeProjects": 'active'

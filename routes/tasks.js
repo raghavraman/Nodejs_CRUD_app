@@ -91,7 +91,7 @@ router.get('/addtask', function(req, res) {
                 } else {
                     console.log("INSIDE ", user_ids);
                     project_ids = results;
-                    res.render('addtask',{
+                    res.render('addTask',{
                         "code": 200,
                         "project_ids": project_ids,
                         "user_ids": user_ids,
