@@ -85,7 +85,7 @@ function stopTimer(input){
     console.log(startTimeStr);
     var old_time = moment(startTimeStr, 'HH:mm:ss');
     // var duration = moment().diff(old_time,'seconds');
-    duration=moment(moment().diff(old_time,'seconds')).utcOffset(0);
+    duration=moment(moment().diff(old_time,'seconds')).utcOffset(0).format("seconds");
     console.log(duration);
     data.duration =parseInt(duration)+parseInt(oldDur);
     
