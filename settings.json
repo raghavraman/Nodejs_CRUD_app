@@ -1,11 +1,4 @@
 {
-    "db":
-    {
-        "host": "us-cdbr-iron-east-05.cleardb.net",
-        "user": "b3c58a53ed557a",
-        "password": "ad65d219",
-        "database": "heroku_9b971f20fd0f895"
-    },
     "devdb":
     {
         "host": "localhost",
