@@ -25,7 +25,7 @@ function reconnect(connection){
     if(connection) connection.destroy();
 
     //- Create a new one
-    var connection = mysql_npm.createConnection(db_config);
+    var connection = mysql_npm.createConnection(settings["db"]);
 
     //- Try to reconnect
     connection.connect(function(err){
