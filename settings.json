@@ -6,5 +6,12 @@
         "password": "ad65d219",
         "database": "heroku_9b971f20fd0f895"
     },
+    "devdb":
+    {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "cmmtest"
+    },
     "admin":["RaghavRaman"]
 }
