@@ -3,7 +3,7 @@ var settings = require('./settings.json');
 var db;
 
 //- Create the connection variable
-var connection = mysql_npm.createConnection(settings["db"]);
+var connection = mysql_npm.createPool(settings["db"]);
 
 //- Establish a new connection
 connection.connect(function(err){
@@ -21,17 +21,14 @@ connection.connect(function(err){
 function reconnect(connection){
     console.log("\n New connection tentative...");
 
-    //- Destroy the current connection variable
-    if(connection) connection.destroy();
-
     //- Create a new one
-    var connection = mysql_npm.createConnection(settings["db"]);
+    connection = mysql_npm.createPool(settings["db"]);
 
     //- Try to reconnect
-    connection.connect(function(err){
+    connection.getConnection(function(err){
         if(err) {
             //- Try to connect every 2 seconds.
-            setTimeout(reconnect, 2000);
+            setTimeout(reconnect(connection), 2000);
         }else {
             console.log("\n\t *** New connection established with the database. ***")
             return connection;
