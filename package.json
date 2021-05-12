@@ -15,7 +15,7 @@
     "bower": "^1.8.8",
     "connect-form": "^0.2.1",
     "cookie-parser": "^1.4.3",
-    "cookies": "^0.7.1",
+    "cookies": "^0.8.0",
     "express": "^4.16.2",
     "express-handlebars": "^5.3.2",
     "express-session": "^1.15.6",
