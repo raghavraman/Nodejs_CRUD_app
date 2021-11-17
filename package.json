@@ -14,7 +14,7 @@
     "body-parser": "^1.18.2",
     "bower": "^1.8.8",
     "connect-form": "^0.2.1",
-    "cookie-parser": "^1.4.3",
+    "cookie-parser": "^1.4.6",
     "cookies": "^0.7.1",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.2",
